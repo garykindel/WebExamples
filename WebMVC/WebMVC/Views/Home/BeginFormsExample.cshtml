@@ -1,0 +1,54 @@
+﻿@model BeginFormsExampleModel
+
+@{
+    ViewData["Title"] = "Html.BeginForm() Examples";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Html.BeginForm() Examples</h1>
+
+    @Html.EditorFor(model => model.Name)
+    <input type="checkbox" readonly id="Checkbox1" checked="@Model.CheckBox_number_1" />
+    <label for="myCheckbox">CheckBox_number_1</label>
+
+    <input type="checkbox" readonly id="Checkbox2" checked="@Model.CheckBox_number_2" />
+    <label for="myCheckbox">CheckBox_number_2</label>
+
+
+    @using (Html.BeginForm("ButtonPush", "Home", FormMethod.Post, Model))
+    {       
+        <input type="submit" value="Submit Form" />
+    }
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#Checkbox1').change(function () {
+                if (this.checked) {
+                    $('#mySubmit').click();
+                }
+            });
+        });
+    </script>
+    @using (Html.BeginForm("CheckBox1Push", "Home", FormMethod.Post, Model))
+    {
+        <input type="submit" id="mySubmit" value="Submit Form 2" style="display: none;" />
+    }
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#Checkbox2').change(function () {
+                if (this.checked) {
+                    $('#mySubmit1').click();
+                }
+            });
+        });
+    </script>
+    @using (Html.BeginForm("CheckBox2Push", "Home", FormMethod.Post, Model))
+    {
+        <input type="submit" id="mySubmit1" value="Submit Form 3" style="display: none;" />
+    }
+
+</div>
